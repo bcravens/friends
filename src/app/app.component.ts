@@ -37,10 +37,6 @@ export class AppComponent {
     this.store.dispatch(FriendsActions.subFriendsChange({ id, friends }));
   }
 
-  onSubmit(friend: Friend): void {
-    this.store.dispatch(FriendsActions.submitFriend({ friend }));
-  }
-
   trackByFn(index: number): number {
     return index;
   }

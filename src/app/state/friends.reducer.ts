@@ -1,6 +1,5 @@
 import { createEntityAdapter, EntityAdapter } from '@ngrx/entity';
 import { createReducer, on } from '@ngrx/store';
-import { v4 as uuidv4 } from 'uuid';
 
 import { Friend } from '../friends.model';
 import { FriendState } from './friend.state';
@@ -14,7 +13,8 @@ export const friendsReducer = createReducer(
   initialState,
 
   on(FriendActions.addFriend, (state) => {
-    return adapter.addOne({ id: uuidv4(), friends: [] }, state);
+    const id = (Object.keys(state.entities).length + 1).toString();
+    return adapter.addOne({ id, friends: [] }, state);
   }),
 
   on(FriendActions.nameChange, (state, { id, name }) => {
@@ -31,9 +31,5 @@ export const friendsReducer = createReducer(
 
   on(FriendActions.subFriendsChange, (state, { id, friends }) => {
     return adapter.updateOne({ id, changes: { friends } }, state);
-  }),
-
-  on(FriendActions.submitFriend, (state, { friend }) => {
-    return adapter.addOne(friend, state);
   })
 );

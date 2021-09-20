@@ -1,7 +1,5 @@
 import { createAction, props } from '@ngrx/store';
 
-import { Friend } from '../friends.model';
-
 export const addFriend = createAction('[Friend] Add Friend');
 
 export const nameChange = createAction(
@@ -22,9 +20,4 @@ export const weightChange = createAction(
 export const subFriendsChange = createAction(
   '[Friend] Friends Change',
   props<{ id: string; friends: string[] }>()
-);
-
-export const submitFriend = createAction(
-  '[Friend] Submit Friend',
-  props<{ friend: Friend }>()
 );

@@ -1,6 +1,8 @@
-<h1>Lets make some friends!</h1>
+<h1 data-testid="title">Lets make some friends!</h1>
 
-<button mat-button (click)="onAddFriend()">Add Friend</button>
+<button data-testid="add-friend" mat-button (click)="onAddFriend()">
+  Add Friend
+</button>
 
 <ng-container
   *ngFor="let friend of friends$ | async; trackBy: trackByFn"
@@ -8,13 +10,15 @@
   #connectForm="connectForm"
 >
   <app-friend-form
+    data-testid="friend-form"
     [form]="connectForm.form"
     [availableFriends]="connectForm.availableFriends"
     (nameChange)="onNameChange($event, friend.id)"
     (ageChange)="onAgeChange($event, friend.id)"
     (weightChange)="onWeightChange($event, friend.id)"
     (subFriendsChange)="onSubFriendsChange($event, friend.id)"
-    (submitForm)="onSubmit($event)"
   >
   </app-friend-form>
 </ng-container>
+
+<app-chart [chart]="friends$ | nodes | async"></app-chart>

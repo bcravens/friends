@@ -28,8 +28,6 @@ export class FriendFormComponent implements AfterViewInit {
 
   @Output() subFriendsChange = new EventEmitter<string[]>();
 
-  @Output() submitForm = new EventEmitter<Friend>();
-
   private ngDestory = new Subject<void>();
 
   ngAfterViewInit(): void {
