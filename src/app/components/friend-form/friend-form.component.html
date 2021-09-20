@@ -1,0 +1,50 @@
+<form *ngIf="form" [formGroup]="form">
+  <mat-form-field appearance="outline">
+    <mat-label>Name</mat-label>
+    <input matInput type="text" formControlName="name" required />
+
+    <mat-error *ngIf="form?.controls?.name?.hasError('required')">
+      This field is required.
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Age</mat-label>
+    <input matInput type="number" formControlName="age" required />
+
+    <mat-error *ngIf="form?.controls?.age?.hasError('required')">
+      This field is required.
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Weight (Pounds)</mat-label>
+    <input matInput type="number" formControlName="weight" required />
+
+    <mat-error *ngIf="form?.controls?.weight?.hasError('required')">
+      This field is required.
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Friends</mat-label>
+    <mat-select formControlName="friends" multiple>
+      <mat-select-trigger>
+        <span>
+          {{
+            form.get("friends")?.value ? form.get("friends")?.value?.length : 0
+          }}
+          {{ form.get("friends")?.value?.length > 1 ? "friends" : "friend" }}
+        </span>
+      </mat-select-trigger>
+
+      <mat-option *ngFor="let friend of availableFriends" [value]="friend.id">
+        {{ friend.name }}
+      </mat-option>
+    </mat-select>
+
+    <mat-error *ngIf="form?.get('friends')?.hasError('required')">
+      This field is required.
+    </mat-error>
+  </mat-form-field>
+</form>

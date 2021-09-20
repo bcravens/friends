@@ -1,1 +1,20 @@
-hello-world
+<h1>Lets make some friends!</h1>
+
+<button mat-button (click)="onAddFriend()">Add Friend</button>
+
+<ng-container
+  *ngFor="let friend of friends$ | async; trackBy: trackByFn"
+  [connectForm]="friend"
+  #connectForm="connectForm"
+>
+  <app-friend-form
+    [form]="connectForm.form"
+    [availableFriends]="connectForm.availableFriends"
+    (nameChange)="onNameChange($event, friend.id)"
+    (ageChange)="onAgeChange($event, friend.id)"
+    (weightChange)="onWeightChange($event, friend.id)"
+    (subFriendsChange)="onSubFriendsChange($event, friend.id)"
+    (submitForm)="onSubmit($event)"
+  >
+  </app-friend-form>
+</ng-container>

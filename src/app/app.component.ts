@@ -4,8 +4,8 @@ import { Observable } from 'rxjs';
 
 import { Friend } from './friends.model';
 import { AppState } from './state/app.state';
-import { selectFriends } from './state/friends.selectors';
-import { addFriend, removeFriend } from './state/friends.actions';
+import * as FriendsActions from './state/friends.actions';
+import { selectAllFriends } from './state/friends.selectors';
 
 @Component({
   selector: 'app-root',
@@ -13,15 +13,35 @@ import { addFriend, removeFriend } from './state/friends.actions';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  friends$: Observable<Friend[]> = this.store.pipe(select(selectFriends));
+  friends$: Observable<Friend[]> = this.store.pipe(select(selectAllFriends));
 
   constructor(private store: Store<AppState>) {}
 
-  onAddFriend(friend: Friend): void {
-    this.store.dispatch(addFriend({ friend }));
+  onAddFriend(): void {
+    this.store.dispatch(FriendsActions.addFriend());
   }
 
-  onRemoveFriend(friendId: string): void {
-    this.store.dispatch(removeFriend({ friendId }));
+  onNameChange(name: string, id: string): void {
+    this.store.dispatch(FriendsActions.nameChange({ id, name }));
+  }
+
+  onAgeChange(age: number, id: string): void {
+    this.store.dispatch(FriendsActions.ageChange({ id, age }));
+  }
+
+  onWeightChange(weight: number, id: string): void {
+    this.store.dispatch(FriendsActions.weightChange({ id, weight }));
+  }
+
+  onSubFriendsChange(friends: string[], id: string): void {
+    this.store.dispatch(FriendsActions.subFriendsChange({ id, friends }));
+  }
+
+  onSubmit(friend: Friend): void {
+    this.store.dispatch(FriendsActions.submitFriend({ friend }));
+  }
+
+  trackByFn(index: number): number {
+    return index;
   }
 }

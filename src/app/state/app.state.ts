@@ -1,5 +1,5 @@
-import { Friend } from '../friends.model';
+import { FriendState } from './friend.state';
 
 export interface AppState {
-  friends: Friend[];
+  friends: FriendState;
 }
